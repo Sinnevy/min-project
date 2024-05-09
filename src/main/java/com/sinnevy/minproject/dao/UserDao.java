@@ -14,8 +14,9 @@ public interface UserDao {
     @Select("select * from user")
     List<UserDto> all();
 
-    @Select("insert into user_role (user_id, role_id) values (#{userId}, #{roleId}) ")
-    Integer addUserRole(@Param("userId") Integer userId, @Param("roleId") Integer roleId);
+    @Insert("insert into user (name, account, password, tel_number) values (#{name}, #{account}, #{password}, #{telNumber}) ")
+    @Options(useGeneratedKeys = true, keyColumn = "id")
+    void addUser(UserDto userDto);
 
     @Select("SELECT * FROM user_role WHERE user_id=#{id}")
     List<UserRoleDto> getRoles(@Param("id") Integer id);

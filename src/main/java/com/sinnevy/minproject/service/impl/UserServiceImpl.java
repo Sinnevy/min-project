@@ -6,6 +6,8 @@ import com.sinnevy.minproject.dao.UserDao;
 import com.sinnevy.minproject.dto.UserDto;
 import com.sinnevy.minproject.dto.UserRoleDto;
 import com.sinnevy.minproject.service.UserService;
+import com.sinnevy.minproject.vo.PageVo;
+import com.sinnevy.minproject.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,35 +23,21 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    public boolean hasSuchRole(Permission[] permissions) {
-//        Integer userId = session.getUserDto().getId();
-//        return hasSuchRole(permissions, userId);
-        return false;
-    }
-
-    public boolean hasSuchRole(Permission[] permissions, Integer userId) {
-        List<UserRoleDto> list = userDao.getRoles(userId);
-        for (UserRoleDto dto : list) {
-            for (Permission permission : permissions) {
-                if (dto.getRoleId().equals(permission.getKey())) {
-                    log.info("当前用户:{} 有权限:{}", userId, JSON.toJSONString(permission));
-                    return true;
-                }
-            }
-        }
-        log.info("当前用户:{} 没有权限 in {}", userId, JSON.toJSONString(permissions));
-        return false;
+    @Override
+    public void add(UserDto user) {
+        log.info("写入user：{}", JSON.toJSONString(user));
+        userDao.addUser(user);
+        log.info("写入后,返回user：{}", JSON.toJSONString(user));
     }
 
     @Override
-    public void allocateRole(Integer userId, Integer roleId) {
-        if (hasSuchRole(new Permission[]{ Permission.ADMIN })) {
-            userDao.addUserRole(userId, roleId);
-        }
-    }
+    public PageVo<UserDto> list(UserVo userVo) {
+        Long count = 1l;
+        PageVo<UserDto> pageVo = new PageVo<UserDto>().init(userVo.getPage(), userVo.getPageSize(), count);
 
-    @Override
-    public List<UserDto> list() {
-        return userDao.all();
+        List<UserDto> list = userDao.all();
+        pageVo.setList(list);
+
+        return pageVo;
     }
 }

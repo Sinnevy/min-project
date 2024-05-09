@@ -2,18 +2,15 @@ package com.sinnevy.minproject.service;
 
 
 import com.sinnevy.minproject.dto.UserDto;
+import com.sinnevy.minproject.vo.PageVo;
+import com.sinnevy.minproject.vo.UserVo;
 
 import java.util.List;
 
 public interface UserService {
 
-    /**
-     * 给用户分配角色
-     * @param userId 用户id
-     * @param roleId 角色id
-     */
-    void allocateRole(Integer userId, Integer roleId);
+    void add(UserDto user);
 
-    List<UserDto> list();
+    PageVo<UserDto> list(UserVo userVo);
 
 }

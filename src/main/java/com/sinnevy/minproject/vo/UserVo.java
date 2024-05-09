@@ -1,5 +1,4 @@
-package com.sinnevy.minproject.dto;
-
+package com.sinnevy.minproject.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -7,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class UserDto {
+public class UserVo extends PageVo {
 
     /**
      * id

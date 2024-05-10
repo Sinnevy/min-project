@@ -11,6 +11,10 @@ public interface UserService {
 
     void add(UserDto user);
 
+    void update(UserDto user);
+
+    void delete(Integer id);
+
     PageVo<UserDto> list(UserVo userVo);
 
 }

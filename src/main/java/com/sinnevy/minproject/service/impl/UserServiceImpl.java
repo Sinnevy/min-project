@@ -31,13 +31,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void update(UserDto user) {
+        log.info("更新user：{}", JSON.toJSONString(user));
+        userDao.updateUser(user);
+        log.info("更新后user：{}", userDao.getById(user.getId()));
+    }
+
+    @Override
+    public void delete(Integer id) {
+        log.info("删除user：{}", id);
+        userDao.deleteUser(id);
+    }
+
+    @Override
     public PageVo<UserDto> list(UserVo userVo) {
-        Long count = 1l;
+        Long count = userDao.count(userVo);
         PageVo<UserDto> pageVo = new PageVo<UserDto>().init(userVo.getPage(), userVo.getPageSize(), count);
-
-        List<UserDto> list = userDao.all();
+        List<UserDto> list = userDao.list(userVo);
         pageVo.setList(list);
-
         return pageVo;
     }
 }

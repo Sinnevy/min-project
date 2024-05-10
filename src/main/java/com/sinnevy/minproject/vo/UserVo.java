@@ -21,10 +21,6 @@ public class UserVo extends PageVo {
      */
     private String account;
     /**
-     * 账户密码
-     */
-    private String password;
-    /**
      * 联系方式
      */
     private String telNumber;

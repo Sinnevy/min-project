@@ -27,11 +27,9 @@ public class UserController {
      * 测试部署成功接口
      * @return
      */
-    @GetMapping("/test")
-    public ResponseEntity<Result> test(@RequestParam("id") Integer userId) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("user", null);
-        return ResponseEntity.ok(Result.success(map));
+    @GetMapping("/getById")
+    public ResponseEntity<Result> getById(@RequestParam("id") Integer id) {
+        return ResponseEntity.ok(Result.success(null));
     }
 
     /**
@@ -50,9 +48,7 @@ public class UserController {
      */
     @PostMapping("/list")
     public ResponseEntity<Result> list(@RequestBody UserVo userVo) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("users", userService.list(userVo));
-        return ResponseEntity.ok(Result.success(map));
+        return ResponseEntity.ok(Result.success(userService.list(userVo)));
     }
 
     /**
@@ -66,5 +62,16 @@ public class UserController {
         return ResponseEntity.ok(Result.success(null));
     }
 
+    @GetMapping("/delete")
+    public ResponseEntity<Result> delete(Integer id) {
+        userService.delete(id);
+        return ResponseEntity.ok(Result.success(null));
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<Result> update(@RequestBody UserDto dto) {
+        userService.update(dto);
+        return ResponseEntity.ok(Result.success(null));
+    }
 
 }

@@ -13,7 +13,7 @@ public interface UserService {
 
     void update(UserDto user);
 
-    void delete(Integer id);
+    void delete(Long id);
 
     PageVo<UserDto> list(UserVo userVo);
 

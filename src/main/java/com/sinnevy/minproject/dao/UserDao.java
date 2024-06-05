@@ -1,8 +1,8 @@
 package com.sinnevy.minproject.dao;
 
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sinnevy.minproject.dto.UserDto;
-import com.sinnevy.minproject.dto.UserRoleDto;
 import com.sinnevy.minproject.vo.UserVo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface UserDao {
+public interface UserDao extends BaseMapper<UserDto> {
 
     @Select("<script> "
             + "SELECT * FROM `user` "
@@ -34,7 +34,7 @@ public interface UserDao {
     void addUser(UserDto userDto);
 
     @Select("SELECT * FROM user WHERE id=#{id}")
-    UserDto getById(@Param("id") Integer id);
+    UserDto getById(@Param("id") Long id);
 
     @Update("<script> "
             + "update `user` set "
@@ -46,7 +46,7 @@ public interface UserDao {
     void updateUser(UserDto dto);
 
     @Delete("DELETE FROM `user` WHERE id=#{id} ")
-    void deleteUser(@Param("id") Integer id);
+    void deleteUser(@Param("id") Long id);
 
 
 }

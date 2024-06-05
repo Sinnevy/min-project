@@ -11,7 +11,7 @@ public class UserVo extends PageVo {
     /**
      * id
      */
-    private Integer id;
+    private Long id;
     /**
      * 姓名
      */

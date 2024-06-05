@@ -63,7 +63,7 @@ public class UserController {
     }
 
     @GetMapping("/delete")
-    public ResponseEntity<Result> delete(Integer id) {
+    public ResponseEntity<Result> delete(Long id) {
         userService.delete(id);
         return ResponseEntity.ok(Result.success(null));
     }
